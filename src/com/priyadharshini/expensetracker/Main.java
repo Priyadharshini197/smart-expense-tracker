@@ -4,6 +4,7 @@ import com.priyadharshini.expensetracker.service.ExpenseService;
 import java.time.LocalDate;
 import com.priyadharshini.expensetracker.model.Expense;
 import com.priyadharshini.expensetracker.model.Category;
+import java.time.format.DateTimeParseException;
 
 public class Main {
     public static void main(String[] args){
@@ -19,20 +20,38 @@ public class Main {
             int choice = sc.nextInt();
             switch(choice){
                 case 1 :
-                    System.out.print("Enter amount: ");
-                    double amount = sc.nextDouble();
-                    sc.nextLine();
-                    System.out.print("Enter description: ");
-                    String description = sc.nextLine();
-                    System.out.print("Enter date (YYYY-MM-DD): ");
-                    String dateInput = sc.nextLine();
-                    LocalDate date = LocalDate .parse(dateInput);
-                    System.out.print("Enter category (FOOD/TRAVEL/...): ");
-                    String catInput = sc.nextLine();    
-                    Category category = Category.valueOf(catInput.toUpperCase());
-                    Expense expense = new Expense(amount , description , date , category);
-                    service.addExpense(expense);
+                    try{
+                        System.out.print("Enter amount: ");
+                        double amount = sc.nextDouble();
+                        sc.nextLine();
+                        System.out.print("Enter description: ");
+                        String description = sc.nextLine();
+                        System.out.print("Enter date (YYYY-MM-DD): ");
+                        String dateInput = sc.nextLine();
+                        LocalDate date = LocalDate .parse(dateInput);
+                        System.out.print("Enter category (FOOD/TRAVEL/...): ");
+                        String catInput = sc.nextLine();    
+                        Category category = Category.valueOf(catInput.toUpperCase());
+                        Expense expense = new Expense(amount , description , date , category);
+                        service.addExpense(expense);
+                        System.out.println("Expense added successfully");
+                    }
+                    catch(InputMismatchException e){
+                        System.out.println("Invalid amount! Please enter a valid number.");
+                        sc.nextLine();
+
+                    }
+                    catch(DateTimeParseException e ){
+                        System.out.println("Invalid date format ! Please use YYYY-MM-DD.");
+                    }
+                    catch(IllegalArgumentException e ){
+                        System.out.println("Invalid category! Please enter a valid category");
+                    }
+                    catch(Exception e ){
+                        System.out.println("Something went wrong . Please try again.");
+                    }
                     break;
+                        
                 case 2 :
                     for(Expense e : service.getAllExpenses()){
                         System.out.println(e);
