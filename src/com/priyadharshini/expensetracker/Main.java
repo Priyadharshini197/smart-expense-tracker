@@ -24,6 +24,7 @@ public class Main {
             System.out.println("2. View All Expenses");
             System.out.println("3. Exit");
             System.out.println("4. Show Total Expense");
+            System.out.println("5.Filter by Category");
             System.out.print("Enter your choice: ");
             int choice = sc.nextInt();
             sc.nextLine();
@@ -79,6 +80,24 @@ public class Main {
                 case 4 :
                     double total = service.getTotalExpense();
                     System.out.println("Total Expense: "+total);
+                    break;
+                case 5 :
+                    try{
+                        System.out.print("Enter category to filter: ");
+                        String input = sc.nextLine();
+                        Category cat = Category.valueOf(input.toUpperCase());
+                        List<Expense> filtered = service.getExpenseByCategory(cat);
+                        if (filtered.isEmpty()){
+                            System.out.println("No expenses found for this category.");
+
+                        }
+                        else{
+                            filtered.forEach(System.out::println);
+                        }
+                    }
+                    catch(IllegalArgumentException e){
+                        System.out.println("Invalid category ! Please enter a valid category.");
+                    }
                     break;
                 default :
                     System.out.println("Invalid choice!");
