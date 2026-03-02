@@ -8,10 +8,15 @@ import com.priyadharshini.expensetracker.model.Expense;
 import com.priyadharshini.expensetracker.model.Category;
 import java.time.format.DateTimeParseException;
 import com.priyadharshini.expensetracker.util.FileUtil;
+import java.time.YearMonth;
+import java.util.stream.Collectors;
+import java.util.Map;
+
 
 public class Main {
     public static void main(String[] args){
         Scanner sc = new Scanner(System.in);
+        
         ExpenseService service = new ExpenseService();
         List<Expense> loadedExpenses = FileUtil.loadExpenses();
         for(Expense e : loadedExpenses){
@@ -25,6 +30,8 @@ public class Main {
             System.out.println("3. Exit");
             System.out.println("4. Show Total Expense");
             System.out.println("5.Filter by Category");
+            System.out.println("6.Monthly Summary");
+
             System.out.print("Enter your choice: ");
             int choice = sc.nextInt();
             sc.nextLine();
@@ -97,6 +104,17 @@ public class Main {
                     }
                     catch(IllegalArgumentException e){
                         System.out.println("Invalid category ! Please enter a valid category.");
+                    }
+                    break;
+                case 6:
+                    Map<YearMonth , Double> summary = service.getMonthlySummary();
+                    if(summary.isEmpty()){
+                        System.out.println("No expenses recorded");
+                    }
+                    else{
+                        summary.forEach((month,monthlytotal) -> 
+                                System.out.println(month + "->" + monthlytotal));
+
                     }
                     break;
                 default :

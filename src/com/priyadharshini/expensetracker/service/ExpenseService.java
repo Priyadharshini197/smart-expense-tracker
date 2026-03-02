@@ -1,5 +1,10 @@
 package com.priyadharshini.expensetracker.service;
 import java.util.*;
+import java.util.stream.Collectors;
+import java.time.YearMonth;
+
+import java.util.Map;
+
 import com.priyadharshini.expensetracker.model.Expense;
 import com.priyadharshini.expensetracker.model.Category;
 
@@ -20,6 +25,12 @@ public class ExpenseService {
         return expenses.stream()
                         .filter(e -> e.getCategory() == category)
                         .toList();
+    }
+    public Map<YearMonth , Double> getMonthlySummary(){
+        return expenses.stream()
+                .collect(Collectors.groupingBy(
+                        e->YearMonth.from(e.getDate()),
+                        Collectors.summingDouble(Expense::getAmount)));
     }
 
 
