@@ -23,6 +23,7 @@ public class Main {
             System.out.println("1. Add Expense");
             System.out.println("2. View All Expenses");
             System.out.println("3. Exit");
+            System.out.println("4. Show Total Expense");
             System.out.print("Enter your choice: ");
             int choice = sc.nextInt();
             sc.nextLine();
@@ -74,6 +75,10 @@ public class Main {
                     break;
                 case 3 :
                     running = false;
+                    break;
+                case 4 :
+                    double total = service.getTotalExpense();
+                    System.out.println("Total Expense: "+total);
                     break;
                 default :
                     System.out.println("Invalid choice!");
