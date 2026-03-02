@@ -1,15 +1,22 @@
 package com.priyadharshini.expensetracker;
 import java.util.*;
 import com.priyadharshini.expensetracker.service.ExpenseService;
+
+import java.io.File;
 import java.time.LocalDate;
 import com.priyadharshini.expensetracker.model.Expense;
 import com.priyadharshini.expensetracker.model.Category;
 import java.time.format.DateTimeParseException;
+import com.priyadharshini.expensetracker.util.FileUtil;
 
 public class Main {
     public static void main(String[] args){
         Scanner sc = new Scanner(System.in);
         ExpenseService service = new ExpenseService();
+        List<Expense> loadedExpenses = FileUtil.loadExpenses();
+        for(Expense e : loadedExpenses){
+            service.addExpense(e);
+        }
         boolean running = true;
         while(running){
             System.out.println("\nSmart Expense Tracker");
@@ -18,6 +25,8 @@ public class Main {
             System.out.println("3. Exit");
             System.out.print("Enter your choice: ");
             int choice = sc.nextInt();
+            sc.nextLine();
+            
             switch(choice){
                 case 1 :
                     try{
@@ -34,7 +43,9 @@ public class Main {
                         Category category = Category.valueOf(catInput.toUpperCase());
                         Expense expense = new Expense(amount , description , date , category);
                         service.addExpense(expense);
+                        FileUtil.saveExpense(expense);
                         System.out.println("Expense added successfully");
+                        break;
                     }
                     catch(InputMismatchException e){
                         System.out.println("Invalid amount! Please enter a valid number.");
