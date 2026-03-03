@@ -38,6 +38,10 @@ public class ExpenseService {
                 .toList();
 
     }
+    public Optional<Expense> getHighestExpense(){
+        return expenses.stream()
+                .max(Comparator.comparingDouble(Expense::getAmount));
+    }
 
 
     

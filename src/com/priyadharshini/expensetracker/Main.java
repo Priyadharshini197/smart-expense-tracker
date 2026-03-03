@@ -32,6 +32,7 @@ public class Main {
             System.out.println("5. Filter by Category");
             System.out.println("6. Monthly Summary");
             System.out.println("7. Sort by Date");
+            System.out.println("8. Get Highest Expense:");
 
             System.out.print("Enter your choice: ");
             int choice = sc.nextInt();
@@ -125,6 +126,16 @@ public class Main {
                     }
                     else{
                         sorted.forEach(System.out::println);
+                    }
+                    break;
+                case 8 :
+                    Optional<Expense> highest = service.getHighestExpense();
+                    if(highest.isPresent()){
+                        System.out.println("Highest Expense: ");
+                        System.out.println(highest.get());
+                    }
+                    else{
+                        System.out.println("No expenses recorded.");
                     }
                     break;
                 default :
