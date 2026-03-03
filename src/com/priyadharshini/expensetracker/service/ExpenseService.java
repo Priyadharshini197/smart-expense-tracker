@@ -32,6 +32,12 @@ public class ExpenseService {
                         e->YearMonth.from(e.getDate()),
                         Collectors.summingDouble(Expense::getAmount)));
     }
+    public List<Expense> getExpensesSortedByDate(){
+        return expenses.stream()
+                .sorted(Comparator.comparing(Expense::getDate))
+                .toList();
+
+    }
 
 
     

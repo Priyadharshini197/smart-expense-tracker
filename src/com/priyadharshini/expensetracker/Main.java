@@ -29,8 +29,9 @@ public class Main {
             System.out.println("2. View All Expenses");
             System.out.println("3. Exit");
             System.out.println("4. Show Total Expense");
-            System.out.println("5.Filter by Category");
-            System.out.println("6.Monthly Summary");
+            System.out.println("5. Filter by Category");
+            System.out.println("6. Monthly Summary");
+            System.out.println("7. Sort by Date");
 
             System.out.print("Enter your choice: ");
             int choice = sc.nextInt();
@@ -115,6 +116,15 @@ public class Main {
                         summary.forEach((month,monthlytotal) -> 
                                 System.out.println(month + "->" + monthlytotal));
 
+                    }
+                    break;
+                case 7 :
+                    List<Expense> sorted = service.getExpensesSortedByDate();
+                    if (sorted.isEmpty()){
+                        System.out.println("No expenses recorded");
+                    }
+                    else{
+                        sorted.forEach(System.out::println);
                     }
                     break;
                 default :
