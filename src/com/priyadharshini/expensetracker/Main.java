@@ -22,6 +22,7 @@ public class Main {
         for(Expense e : loadedExpenses){
             service.addExpense(e);
         }
+        service.initializeNextId();
         boolean running = true;
         while(running){
             System.out.println("\nSmart Expense Tracker");

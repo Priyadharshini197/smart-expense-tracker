@@ -3,6 +3,7 @@ import java.time.LocalDate;
 
 
 public class Expense {
+    private int id;
     private double amount;
     private  String description;
     private LocalDate date ;
@@ -12,6 +13,19 @@ public class Expense {
         this.description = description;
         this.date = date;
         this.category = category;
+    }
+    public Expense(int id , double amount , String description,LocalDate date,Category category){
+        this.id = id;
+        this.amount = amount;
+        this.description = description;
+        this.date = date ;
+        this.category = category;
+    }
+    public int getId(){
+        return id;
+    }
+    public void setId(int id){
+        this.id = id;
     }
     public double getAmount(){
         return amount;
@@ -27,10 +41,11 @@ public class Expense {
     }
     @Override
     public String toString() {
-        return "Amount: " + amount +
-        " | Description:  "+  description + 
-        " | Date:  " + date + 
-        " | Category:  " + category ;
+        return "ID: " + id +
+            "Amount: " + amount +
+            " | Description:  "+  description + 
+            " | Date:  " + date + 
+            " | Category:  " + category ;
     }
 
     

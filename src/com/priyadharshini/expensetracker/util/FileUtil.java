@@ -12,7 +12,8 @@ public class FileUtil {
             File file = new File(FILE_PATH);
             file.getParentFile().mkdirs();
             BufferedWriter writer = new BufferedWriter(new FileWriter(file,true));
-            String line = expense.getAmount() + "," +
+            String line = expense.getId() + "," +
+                          expense.getAmount() + "," +
                           expense.getDescription() + "," +
                           expense.getDate() + "," +
                           expense.getCategory();
@@ -37,6 +38,7 @@ public class FileUtil {
             String line;
             while((line = reader.readLine()) != null){
                 String[] parts = line.split(",");
+                int id = Integer.parseInt(parts[0]);
                 double amount = Double.parseDouble(parts[0]);
                 String description = parts[1];
                 LocalDate date = LocalDate.parse(parts[2]);

@@ -10,8 +10,19 @@ import com.priyadharshini.expensetracker.model.Category;
 
 public class ExpenseService {
     private List<Expense> expenses = new ArrayList<>();
+    private int nextId = 1 ;
     public void addExpense(Expense expense){
+        expense.setId(nextId++);
         expenses.add(expense);
+    }
+    public void addLoadedExpense(Expense expense){
+        expenses.add(expense);
+    }
+    public void initializeNextId(){
+        nextId = expenses.stream()
+                .mapToInt(Expense::getId)
+                .max()
+                .orElse(0) + 1;
     }
     public List<Expense> getAllExpenses(){
         return expenses;
