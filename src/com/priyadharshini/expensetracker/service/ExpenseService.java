@@ -53,6 +53,9 @@ public class ExpenseService {
         return expenses.stream()
                 .max(Comparator.comparingDouble(Expense::getAmount));
     }
+    public boolean deleteExpenseById(int id){
+        return expenses.removeIf(e -> e.getId() == id);
+    }
 
 
     

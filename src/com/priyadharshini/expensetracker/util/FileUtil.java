@@ -56,6 +56,25 @@ public class FileUtil {
         }
         return expenses;
     }
+    public static void rewriteAllExpenses(List<Expense> expenses){
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(FILE_PATH , false))){
+            for(Expense expense : expenses){
+                String line = expense.getId() +"," +
+                              expense.getAmount() + "," +
+                              expense.getDescription() + "," +
+                              expense.getDate() + "," +
+                              expense.getCategory();
+                writer.write(line);
+                writer.newLine();
+
+            }
+            System.out.println("File updated successfully.");
+        }
+        catch (IOException e){
+            System.out.println("Error rewriting file.");
+            e.printStackTrace();
+        }
+    }
 
     
 
