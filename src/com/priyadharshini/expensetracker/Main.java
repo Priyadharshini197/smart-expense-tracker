@@ -35,6 +35,7 @@ public class Main {
             System.out.println("7. Sort by Date");
             System.out.println("8. Get Highest Expense:");
             System.out.println("9. Delete Expense by ID ");
+            System.out.println("10. Update Expense by ID");
 
             System.out.print("Enter your choice: ");
             int choice = sc.nextInt();
@@ -153,6 +154,33 @@ public class Main {
                         System.out.println("Expense not found");
                     }
                     break;
+                case 10 :
+                    System.out.print("Enter ID to update: ");
+                    int updateId = sc.nextInt();
+                    sc.nextLine();
+
+                    System.out.print("Enter new amount: ");
+                    double newAmount = sc.nextDouble();
+                    sc.nextLine();
+
+                    System.out.print("Enter new description: ");
+                    String newDescription = sc.nextLine();
+
+                    System.out.print("Enter new date (YYYY-MM-DD): ");
+                    LocalDate newDate = LocalDate.parse(sc.nextLine());
+
+                    System.out.print("Enter new category: ");
+                    Category newCategory = Category.valueOf(sc.nextLine().toUpperCase());
+                    boolean updated = service.updateExpense(updateId , newAmount , newDescription ,newDate , newCategory);
+                    if(updated){
+                        FileUtil.rewriteAllExpenses(service.getAllExpenses());
+                        System.out.println("Expense updated successfully");
+                    }
+                    else{
+                        System.out.println("Expense ID not found.");
+                    }
+                    break;
+
                 default :
                     System.out.println("Invalid choice!");
             }

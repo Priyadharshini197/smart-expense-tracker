@@ -1,6 +1,7 @@
 package com.priyadharshini.expensetracker.service;
 import java.util.*;
 import java.util.stream.Collectors;
+import java.time.LocalDate;
 import java.time.YearMonth;
 
 import java.util.Map;
@@ -56,6 +57,22 @@ public class ExpenseService {
     public boolean deleteExpenseById(int id){
         return expenses.removeIf(e -> e.getId() == id);
     }
+    public boolean updateExpense(int id , double amount,String description,LocalDate date , Category category ){
+        for(Expense expense : expenses){
+            if(expense.getId() == id){
+                expense.setAmount(amount);
+                expense.setDescription(description);
+                expense.setDate(date);
+                expense.setCategory(category);
+                return true;
+            }
+        }
+        return false;
+    }
+
+                            
+
+                                
 
 
     
