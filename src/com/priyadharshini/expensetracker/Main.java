@@ -1,6 +1,7 @@
 package com.priyadharshini.expensetracker;
 import java.util.*;
 import com.priyadharshini.expensetracker.service.ExpenseService;
+import com.priyadharshini.expensetracker.model.Category;
 
 import java.io.File;
 import java.time.LocalDate;
@@ -11,6 +12,8 @@ import com.priyadharshini.expensetracker.util.FileUtil;
 import java.time.YearMonth;
 import java.util.stream.Collectors;
 import java.util.Map;
+import com.priyadharshini.expensetracker.ui.MenuRenderer;
+import com.priyadharshini.expensetracker.input.InputHandler;
 
 
 public class Main {
@@ -20,61 +23,34 @@ public class Main {
         ExpenseService service = new ExpenseService();
         List<Expense> loadedExpenses = FileUtil.loadExpenses();
         for(Expense e : loadedExpenses){
-            service.addExpense(e);
+            service.addLoadedExpense(e);
         }
         service.initializeNextId();
         boolean running = true;
         while(running){
-            System.out.println("\nSmart Expense Tracker");
-            System.out.println("1. Add Expense");
-            System.out.println("2. View All Expenses");
-            System.out.println("3. Exit");
-            System.out.println("4. Show Total Expense");
-            System.out.println("5. Filter by Category");
-            System.out.println("6. Monthly Summary");
-            System.out.println("7. Sort by Date");
-            System.out.println("8. Get Highest Expense:");
-            System.out.println("9. Delete Expense by ID ");
-            System.out.println("10. Update Expense by ID");
-
-            System.out.print("Enter your choice: ");
+            MenuRenderer.showMenu();
             int choice = sc.nextInt();
             sc.nextLine();
             
             switch(choice){
-                case 1 :
-                    try{
-                        System.out.print("Enter amount: ");
-                        double amount = sc.nextDouble();
-                        sc.nextLine();
-                        System.out.print("Enter description: ");
-                        String description = sc.nextLine();
-                        System.out.print("Enter date (YYYY-MM-DD): ");
-                        String dateInput = sc.nextLine();
-                        LocalDate date = LocalDate .parse(dateInput);
-                        System.out.print("Enter category (FOOD/TRAVEL/...): ");
-                        String catInput = sc.nextLine();    
-                        Category category = Category.valueOf(catInput.toUpperCase());
-                        Expense expense = new Expense(amount , description , date , category);
-                        service.addExpense(expense);
-                        FileUtil.saveExpense(expense);
-                        System.out.println("Expense added successfully");
-                        break;
-                    }
-                    catch(InputMismatchException e){
-                        System.out.println("Invalid amount! Please enter a valid number.");
-                        sc.nextLine();
+                case 1:
 
-                    }
-                    catch(DateTimeParseException e ){
-                        System.out.println("Invalid date format ! Please use YYYY-MM-DD.");
-                    }
-                    catch(IllegalArgumentException e ){
-                        System.out.println("Invalid category! Please enter a valid category");
-                    }
-                    catch(Exception e ){
-                        System.out.println("Something went wrong . Please try again.");
-                    }
+                    double amount = InputHandler.readAmount(sc);
+
+                    String description = InputHandler.readDescription(sc);
+
+                    LocalDate date = InputHandler.readDate(sc);
+
+                    Category category = InputHandler.readCategory(sc);
+
+                    Expense expense = new Expense(amount, description, date, category);
+
+                    service.addExpense(expense);
+
+                    FileUtil.saveExpense(expense);
+
+                    System.out.println("Expense added successfully");
+
                     break;
                         
                 case 2 :
@@ -178,6 +154,18 @@ public class Main {
                     }
                     else{
                         System.out.println("Expense ID not found.");
+                    }
+                    break;
+
+                case 11:
+                    System.out.print("Enter keyword to search: ");
+                    String keyword = sc.nextLine();
+                    List<Expense> results = service.searchByDescription(keyword);
+                    if(results.isEmpty()){
+                        System.out.println("No matching expenses found.");
+                    }
+                    else{
+                        results.forEach(System.out::println);
                     }
                     break;
 

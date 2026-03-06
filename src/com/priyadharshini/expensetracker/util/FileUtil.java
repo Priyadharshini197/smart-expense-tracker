@@ -39,11 +39,11 @@ public class FileUtil {
             while((line = reader.readLine()) != null){
                 String[] parts = line.split(",");
                 int id = Integer.parseInt(parts[0]);
-                double amount = Double.parseDouble(parts[0]);
-                String description = parts[1];
-                LocalDate date = LocalDate.parse(parts[2]);
-                Category category = Category.valueOf(parts[3]);
-                Expense expense = new Expense(amount , description ,date , category);
+                double amount = Double.parseDouble(parts[1]);
+                String description = parts[2];
+                LocalDate date = LocalDate.parse(parts[3]);
+                Category category = Category.valueOf(parts[4]);
+                Expense expense = new Expense(id,amount , description ,date , category);
                 expenses.add(expense);
 
             }

@@ -54,6 +54,12 @@ public class ExpenseService {
         return expenses.stream()
                 .max(Comparator.comparingDouble(Expense::getAmount));
     }
+    public List<Expense> searchByDescription(String keyword){
+        return expenses.stream()
+                        .filter(e -> e.getDescription().toLowerCase()
+                        .contains(keyword.toLowerCase()))
+                        .toList();
+    }
     public boolean deleteExpenseById(int id){
         return expenses.removeIf(e -> e.getId() == id);
     }
