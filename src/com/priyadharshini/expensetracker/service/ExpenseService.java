@@ -81,6 +81,12 @@ public class ExpenseService {
                 .average()
                 .orElse(0);
     }
+    public List<Expense> getTopExpenses(int n){
+        return expenses.stream()
+                .sorted(Comparator.comparingDouble(Expense::getAmount).reversed())
+                .limit(n)
+                .toList();
+    }
 
                             
 

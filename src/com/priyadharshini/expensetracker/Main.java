@@ -175,6 +175,16 @@ public class Main {
                     System.out.println("Average Expense: "+ avg);
                     break;
 
+                case 13 :
+                    List<Expense> top = service.getTopExpenses(3);
+                    if(top.isEmpty()){
+                        System.out.println("No expenses recorded");
+                    }
+                    else{
+                        top.forEach(System.out::println);
+                    }
+                    break;
+
                 default :
                     System.out.println("Invalid choice!");
             }
