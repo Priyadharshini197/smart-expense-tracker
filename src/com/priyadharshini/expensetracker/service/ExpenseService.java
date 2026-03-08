@@ -75,6 +75,12 @@ public class ExpenseService {
         }
         return false;
     }
+    public double getAverageExpense(){
+        return expenses.stream()
+                .mapToDouble(Expense::getAmount)
+                .average()
+                .orElse(0);
+    }
 
                             
 

@@ -168,6 +168,12 @@ public class Main {
                         results.forEach(System.out::println);
                     }
                     break;
+                
+                case 12 :
+                    double avg = service.getAverageExpense();
+                    
+                    System.out.println("Average Expense: "+ avg);
+                    break;
 
                 default :
                     System.out.println("Invalid choice!");
