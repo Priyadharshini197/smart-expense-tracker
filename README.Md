@@ -1,10 +1,19 @@
 # Smart Expense Tracker (Console-Based Java Application)
 ## Features
-- Add new expense
-- View all expenses
-- Category management using Enum
-- Date handling using LocalDate
-- Clean layered structure (Model + Service)
+Smart Expense Tracker
+1. Add Expense
+2. View All Expenses
+3. Exit
+4. Show Total Expense
+5. Filter by Category
+6. Monthly Summary
+7. Sort by Date
+8. Get Highest Expense
+9. Delete Expense by ID
+10. Update Expense by ID
+11. Search expense by Description
+12. Show Average Expense
+13. Show Top 3 Expenses
 ## Tech Stack
 - Java (Core Java)
 - OOP
@@ -13,6 +22,14 @@
 - Collections (List, ArrayList)
 ## How to Run
 
-1. Clone the repository
-2. Compile the project
-3. Run Main class
+```bash
+# Step 1: Open integrated terminal
+# Step 2: Navigate to src folder
+cd src
+
+# Step 3: Compile the program
+javac com/priyadharshini/expensetracker/Main.java
+
+# Step 4: Run the program
+java com.priyadharshini.expensetracker.Main
+```
