@@ -87,6 +87,12 @@ public class ExpenseService {
                 .limit(n)
                 .toList();
     }
+    public Map<Category,Double> getCategoryTotals(){
+        return expenses.stream()
+                .collect(Collectors.groupingBy(Expense::getCategory,
+                    Collectors.summingDouble(Expense::getAmount)
+                ));
+    }
 
                             
 

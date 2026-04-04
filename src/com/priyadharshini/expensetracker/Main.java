@@ -185,6 +185,18 @@ public class Main {
                     }
                     break;
 
+                case 14 :
+                    Map<Category,Double> totals = service.getCategoryTotals();
+                    if(totals.isEmpty()){
+                        System.out.println("No expenses recorded.");
+                    }
+                    else{
+                        totals.forEach((cat,total) ->
+                                        System.out.println(cat +" -> "+ total));
+
+                    
+                    }
+
                 default :
                     System.out.println("Invalid choice!");
             }

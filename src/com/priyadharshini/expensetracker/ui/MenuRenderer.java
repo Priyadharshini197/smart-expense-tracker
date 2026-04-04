@@ -16,6 +16,7 @@ public class MenuRenderer {
     System.out.println("11. Search expense by Description");
     System.out.println("12. Show Average Expense");
     System.out.println("13. Show Top 3 Expenses");
+    System.out.println("14. Category Expense Breakdown");
     System.out.print("Enter your choice: ");
 
    }
