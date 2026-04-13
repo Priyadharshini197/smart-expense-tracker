@@ -6,7 +6,6 @@ import com.priyadharshini.expensetracker.model.Category;
 import java.io.File;
 import java.time.LocalDate;
 import com.priyadharshini.expensetracker.model.Expense;
-import com.priyadharshini.expensetracker.model.Category;
 import java.time.format.DateTimeParseException;
 import com.priyadharshini.expensetracker.util.FileUtil;
 import java.time.YearMonth;
@@ -196,6 +195,7 @@ public class Main {
 
                     
                     }
+                    break;
 
                 default :
                     System.out.println("Invalid choice!");
