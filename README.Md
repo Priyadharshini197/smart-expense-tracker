@@ -14,6 +14,7 @@ Smart Expense Tracker
 11. Search expense by Description
 12. Show Average Expense
 13. Show Top 3 Expenses
+14. Category Expense Breakdown
 ## Tech Stack
 - Java (Core Java)
 - OOP
