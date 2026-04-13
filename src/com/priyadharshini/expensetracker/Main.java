@@ -2,20 +2,21 @@ package com.priyadharshini.expensetracker;
 import java.util.*;
 import com.priyadharshini.expensetracker.service.ExpenseService;
 import com.priyadharshini.expensetracker.model.Category;
-
-import java.io.File;
 import java.time.LocalDate;
 import com.priyadharshini.expensetracker.model.Expense;
-import java.time.format.DateTimeParseException;
 import com.priyadharshini.expensetracker.util.FileUtil;
 import java.time.YearMonth;
-import java.util.stream.Collectors;
-import java.util.Map;
+
 import com.priyadharshini.expensetracker.ui.MenuRenderer;
 import com.priyadharshini.expensetracker.input.InputHandler;
 
 
 public class Main {
+    public static void pause(Scanner sc){
+        System.out.println("\nPress Enter to continue...");
+        sc.nextLine();
+    }
+    
     public static void main(String[] args){
         Scanner sc = new Scanner(System.in);
         
@@ -49,6 +50,7 @@ public class Main {
                     FileUtil.saveExpense(expense);
 
                     System.out.println("Expense added successfully");
+                    pause(sc);
 
                     break;
                         
@@ -60,13 +62,16 @@ public class Main {
                     if(service.getAllExpenses().isEmpty()) {
                         System.out.println("No expenses recorded yet.");
                     }
+                    pause(sc);
                     break;
                 case 3 :
+                    System.out.println("Exiting...Thank you!");
                     running = false;
                     break;
                 case 4 :
                     double total = service.getTotalExpense();
                     System.out.println("Total Expense: "+total);
+                    pause(sc);
                     break;
                 case 5 :
                     try{
@@ -85,6 +90,7 @@ public class Main {
                     catch(IllegalArgumentException e){
                         System.out.println("Invalid category ! Please enter a valid category.");
                     }
+                    pause(sc);
                     break;
                 case 6:
                     Map<YearMonth , Double> summary = service.getMonthlySummary();
@@ -96,6 +102,7 @@ public class Main {
                                 System.out.println(month + "->" + monthlytotal));
 
                     }
+                    pause(sc);
                     break;
                 case 7 :
                     List<Expense> sorted = service.getExpensesSortedByDate();
@@ -105,6 +112,7 @@ public class Main {
                     else{
                         sorted.forEach(System.out::println);
                     }
+                    pause(sc);
                     break;
                 case 8 :
                     Optional<Expense> highest = service.getHighestExpense();
@@ -115,6 +123,7 @@ public class Main {
                     else{
                         System.out.println("No expenses recorded.");
                     }
+                    pause(sc);
                     break;
                 case 9 :
                     System.out.print("Enter ID to delete: ");
@@ -128,6 +137,7 @@ public class Main {
                     else{
                         System.out.println("Expense not found");
                     }
+                    pause(sc);
                     break;
                 case 10 :
                     System.out.print("Enter ID to update: ");
@@ -154,6 +164,7 @@ public class Main {
                     else{
                         System.out.println("Expense ID not found.");
                     }
+                    pause(sc);
                     break;
 
                 case 11:
@@ -166,12 +177,14 @@ public class Main {
                     else{
                         results.forEach(System.out::println);
                     }
+                    pause(sc);
                     break;
                 
                 case 12 :
                     double avg = service.getAverageExpense();
                     
                     System.out.println("Average Expense: "+ avg);
+                    pause(sc);
                     break;
 
                 case 13 :
@@ -182,6 +195,7 @@ public class Main {
                     else{
                         top.forEach(System.out::println);
                     }
+                    pause(sc);
                     break;
 
                 case 14 :
@@ -195,12 +209,15 @@ public class Main {
 
                     
                     }
+                    pause(sc);
                     break;
 
                 default :
                     System.out.println("Invalid choice!");
+                    pause(sc);
             }
         }
+        sc.close();
 
         
     }
