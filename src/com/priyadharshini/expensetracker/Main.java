@@ -191,8 +191,8 @@ public class Main {
                         System.out.println("No expenses recorded.");
                     }
                     else{
-                        totals.forEach((cat,total) ->
-                                        System.out.println(cat +" -> "+ total));
+                        totals.forEach((cat,value) ->
+                                        System.out.println(cat +" -> "+ value));
 
                     
                     }
