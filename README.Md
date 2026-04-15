@@ -34,3 +34,5 @@ javac com/priyadharshini/expensetracker/Main.java
 # Step 4: Run the program
 java com.priyadharshini.expensetracker.Main
 ```
+##  Demo Video
+ [Click here to watch the demo](https://drive.google.com/file/d/18EbfFYRb9UKRIRT-nhr0oXw4L7ySqyXh/view?usp=sharing)
